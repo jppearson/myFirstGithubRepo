@@ -8,8 +8,6 @@ package Controllers
   end Controller;
   //////////////////////////
   ///////////////////////////
-  block PetersController
-  end PetersController;
   ///////////////////////////
   block PatricksController
   end PatricksController;
@@ -26,5 +24,16 @@ package Controllers
     e = command - sensor;
     driver = Kp * e;
   end PController;
+  block PetersController "Peters Proportional Controller"
+    extends Controller;
+    parameter Real Kp = 1;
+    //Default Proportional Gain
+  protected
+    Real e;
+    //reference Error
+  equation
+    e = command - sensor;
+    driver = Kp * e;
+  end PetersController;
 end Controllers;
 
