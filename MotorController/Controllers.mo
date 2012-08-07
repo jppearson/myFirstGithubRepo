@@ -11,19 +11,20 @@ package Controllers
   ///////////////////////////
   block PatricksController
     extends Controller;
-	parameter Real Kp = 1;
-	parameter Real Ki = 1;
-	parameter Real Kd = 1;
+    parameter Real Kp = 1;
+    parameter Real Ki = 1;
+    parameter Real Kd = 1;
   protected
     Real e;
-	Real I ( start = 0 );
-	Real D;
+    Real I(start = 0);
+    Real D;
   equation
     e = command - sensor;
-	e = der(I);
-	D = der(e);
-	driver = Kp * e + Ki * I; // Adding the derivative term gives a "divide by zero" error
+    e = der(I);
+    D = der(e);
+    driver = Kp * e + Ki * I;
   end PatricksController;
+  // Adding the derivative term gives a "divide by zero" error
   ///////////////////////////
   block AlexsController
   end AlexsController;
@@ -40,13 +41,16 @@ package Controllers
   block PetersController "Peters Proportional Controller"
     extends Controller;
     parameter Real Kp = 1;
+    parameter Real Ki = 1;
     //Default Proportional Gain
   protected
     Real e;
+    Real IntE;
     //reference Error
   equation
     e = command - sensor;
-    driver = Kp * e;
+    e = der(IntE);
+    driver = Kp * e + Ki * IntE;
   end PetersController;
 end Controllers;
 

@@ -2,7 +2,7 @@ model ControllerAndMotor
   import Modelica.Blocks;
   import Controllers.*;
   Blocks.Sources.Sine sinsig(amplitude = 0.2, freqHz = 0.3, offset = 1.0);
-  replaceable PController con(Kp = 0.4);
+  replaceable PController con(Kp = 1);
   Blocks.Continuous.TransferFunction motor(a = {0.8,0.1});
 equation
   connect(sinsig.y,con.command);
