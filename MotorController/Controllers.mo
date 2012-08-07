@@ -12,6 +12,19 @@ package Controllers
   end PetersController;
   ///////////////////////////
   block PatricksController
+    extends Controller;
+	parameter Real Kp = 1;
+	parameter Real Ki = 1;
+	parameter Real Kd = 1;
+  protected
+    Real e;
+	Real I ( start = 0 );
+	Real D;
+  equation
+    e = command - sensor;
+	e = der(I);
+	D = der(e);
+	driver = Kp * e + Ki * I; // Adding the derivative term gives a "divide by zero" error
   end PatricksController;
   ///////////////////////////
   block AlexsController
