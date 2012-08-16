@@ -30,7 +30,8 @@ equation
   connect(controller.cmdDir,vThruster.cmdDir);
   connect(controller.cmdThrust,vThruster.cmdT);
   connect(controller.maxThrust,vThruster.K);
-  connect(vThruster.fuelBurnRate,FT.fuelRateCmd);
+  connect(vThruster.fuelRateControl, FT.fuelRateCmd);
   connect(FT.fuelRateOut,FP.fuelPumpRate);
+  connect(FP.fuelPumpRate, 
 end vehicle;
 
