@@ -3,7 +3,7 @@ model fuelTank
   parameter Real tareMass;
   parameter Real maxCapacity;
   Real currFuel(start = maxCapacity);
-  Real fuelRateCmd;  // From Thruster
+  Real fuelRateCmd;
   Real fuelRateOut;
   // Current fuelRate to fuelPump
 equation

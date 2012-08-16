@@ -1,37 +1,37 @@
 model vehicle
-  parameter Real totalMass;
+  import Modelica.Math.*;
+  Real totalMass;
   // Total Mass of vehicle
-  Vector F(x = 0, y = 0);
+  Real[2] F;
   // Force acting on the vehicle
-  Vector pos(x = 0, y = 0);
+  Real[2] pos;
   // Starting Position of the Vechicle
-  Vector v(x = 0, y = 0);
+  Real[2] v;
   // Starting Velocity of the Vechicle
-  Vector a(x = 0, y = 0);
+  Real[2] a;
   // Starting Acceleration of the Vechicle
-  Vector enemyPos();
-  Vector enemyV();
-  fuelTank FT();
-  fuelPump FP();
-  thruster vThruster();
+  parameter Real[2] enemyPos = {0,0};
+  //Real[2] enemyV;
+  fuelTank FT(tareMass = 25, maxCapacity = 10000);
+  fuelPump FP(mass = 5, maxDp = 23, A = 0.15, T = 3);
+  thruster vThruster(mass = 50, rMax = 7.6, n = 6, K = 23000, LagK = 1);
   vehicleController controller();
 equation
-  dir(pos.x) = v.x;
-  dir(pos.y) = v.y;
-  dir(v.x) = a.x;
-  dir(v.y) = a.y;
-  F.x = totalMass * a.x;
-  F.y = totalMass * a.y;
-  controller.enemyPos = enemyPos;
-  controller.enemyV = enemyV;
-  controller.selfPos = pos;
-  controller.selfV = v;
-  F = vThruster.outT;
+  totalMass = FT.mass + FP.mass + vThruster.mass;
+  der(pos[1]) = v[1];
+  der(pos[2]) = v[2];
+  der(v[1]) = a[1];
+  der(v[2]) = a[2];
+  F[1] = totalMass * a[1];
+  F[2] = totalMass * a[2];
+  connect(enemyPos,controller.enemyPos);
+  connect(pos,controller.selfPos);
+  connect(F,vThruster.outT);
   connect(controller.cmdDir,vThruster.cmdDir);
   connect(controller.cmdThrust,vThruster.cmdT);
-  connect(controller.maxThrust,vThruster.K);
-  connect(vThruster.fuelRateControl, FT.fuelRateCmd);
-  connect(FT.fuelRateOut,FP.fuelPumpRate);
-  connect(FP.fuelPumpRate, 
+  connect(vThruster.fuelBurnRate,FP.fuelRateOut);
+  connect(vThruster.fuelRateControl,FP.cmdPumpRate);
+  connect(FP.fuelRateIn,FT.fuelRateOut);
+  connect(FP.fuelTankLoss,FT.fuelRateCmd);
 end vehicle;
 

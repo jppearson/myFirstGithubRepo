@@ -12,20 +12,16 @@ model fuelPump
   // Orifice Constant
   parameter Real rho = 1000;
   // Fuel Density
-  Real actDp;
-  // actuall deltaP
-  Real cmdDp;
-  // target deltaP
+  Real cmdPumpRate;
+  Real fuelRateIn;
+  Real fuelRateOut;
+  Real fuelTankLoss;
   Real currDp;
-  // How much pressure is currently in the fuel pump
-  Real fuelPumpRate;
-  // How much fuel is flowing through the pump
-  TransferFunction pump(b = {1}, a = {T,1});
-  // cmd-actuall transfer function
+  TransferFunction pumpDelay(b = {1}, a = {T,1});
 equation
-  connect(pump.u,cmdDp);
-  connect(pump.y,actDp);
-  currDp = if actDp < maxDp then actDp else maxDp;
-  fuelPumpRate = C * A * sqrt(2 * rho * currDp);
+  connect(pumpDelay.u,fuelRateIn);
+  connect(pumpDelay.y,fuelRateOut);
+  cmdPumpRate = C * A * sqrt(2 * rho * currDp);
+  fuelTankLoss = if currDp < maxDp then cmdPumpRate else C * A * sqrt(2 * rho * maxDp);
 end fuelPump;
 

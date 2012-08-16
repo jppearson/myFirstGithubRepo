@@ -15,21 +15,23 @@ model thruster
   Real cmdDir;
   // input direction from controller
   Real actDir;
-  Real fuelBurnRate;
-  // current Fuel Burn Rate the thruster needs to burn
-  Real fuelRateControl;  // Send to fuel tank
-  Real cmdT;
-  // target  thrust output from controller
-  Vector outT();
-  // Output thrust to vehicle
   TransferFunction g(b = {1}, a = {LagK,1});
   // Cmd-To-Actuall Transfer Function 
+  Real cmdT;
+  // target  thrust output from controller
+  Real fuelBurnRate;
+  // current Fuel Burn Rate the thruster needs to burn
+  Real fuelRateControl;
+  // Send to fuel pump
+  Real[2] outT;
+  // Output thrust to vehicle
+  Real outTMag;
 equation
   connect(g.u,cmdDir);
   connect(g.y,actDir);
-  fuelRateControl = if -n*log(1 - cmdT/K) < rMax then -n*log(1 - cmdT/K) else rMax;
-  outT.magnitude = K * (1 - exp(-fuelBurnRate / n));
-  outT.x = cmdT * cos(actDir);
-  outT.y = cmdT * sin(actDir);
+  fuelRateControl = if -n * log(1 - cmdT / K) < rMax then -n * log(1 - cmdT / K) else rMax;
+  outTMag = K * (1 - exp(-fuelBurnRate / n));
+  outT[1] = outTMag * cos(actDir);
+  outT[2] = outTMag * sin(actDir);
 end thruster;
 
