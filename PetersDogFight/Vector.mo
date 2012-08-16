@@ -1,7 +1,7 @@
 model Vector
   import Modelica.Math.*;
-  Real x;
-  Real y;
+  Real x(start = 0);
+  Real y(start = 0);
   Real theta;
   Real magnitude;
 equation

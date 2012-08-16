@@ -1,4 +1,8 @@
 model thruster
+  // The Thruster takes an input direction, and cmd Thrust to output from controller
+  // and outputs a vector Thrust output to the vehicle
+  import Modelica.Blocks.Continuous.*;
+  import Modelica.Math.*;
   parameter Real mass;
   parameter Real rMax;
   // Max Fuel Burn Rate
@@ -11,18 +15,18 @@ model thruster
   Real cmdDir;
   // input direction from controller
   Real actDir;
-  Real r;
-  // current Fuel Burn Rate
+  Real fuelBurnRate;
+  // current Fuel Burn Rate the thruster needs to burn
   Real cmdT;
   // target  thrust output from controller
-  vector outT();
+  Vector outT();
   // Output thrust to vehicle
   TransferFunction g(b = {1}, a = {LagK,1});
   // Cmd-To-Actuall Transfer Function 
 equation
   connect(g.u,cmdDir);
   connect(g.y,actDir);
-  outT.magnitude = K * (1 - e ^ (-r / n));
+  outT.magnitude = K * (1 - e ^ (-fuelBurnRate / n));
   outT.x = cmdT * cos(actDir);
   outT.y = cmdT * sin(actDir);
 end thruster;

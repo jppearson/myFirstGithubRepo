@@ -5,15 +5,14 @@ model vehicleController
   vector selfPos();
   // Input Self Pos and Velocity
   vector selfV();
-  Real dir;
+  parameter Real maxThrust;
+  // From thruster
+  Real cmdDir;
   // Ouput Direction to thruster
-  Real thrust;
-  // Ouput Thrust to thruster
-  Real cmdDeltaP;
-  // Target DeltaP in Fuel Pump
-  Real actDeltaP;
-  // Current Pressure in Fuel Pump
+  Real cmdThrust;
+  // Magnitude Thrust to thruster
 equation
   dir = enemyPos.theta;
+  cmdThrust = maxThrust;
 end vehicleController;
 

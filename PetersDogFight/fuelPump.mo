@@ -1,4 +1,5 @@
 model fuelPump
+  import Modelica.Blocks.Continuous.*;
   parameter Real mass;
   // mass of fuel pump
   parameter Real maxDp;
@@ -12,9 +13,11 @@ model fuelPump
   parameter Real rho = 1000;
   // Fuel Density
   Real actDp;
-  // current deltaP
+  // actuall deltaP
   Real cmdDp;
   // target deltaP
+  Real currDp;
+  // How much pressure is currently in the fuel pump
   Real fuelPumpRate;
   // How much fuel is flowing through the pump
   TransferFunction pump(b = {1}, a = {T,1});
@@ -22,7 +25,7 @@ model fuelPump
 equation
   connect(pump.u,cmdDp);
   connect(pump.y,actDp);
-  outDp = if actDp < maxDp then actDp else maxDp;
-  fuelPumpRate = C * A * sqrt(2 * rho * outDp);
+  currDp = if actDp < maxDp then actDp else maxDp;
+  fuelPumpRate = C * A * sqrt(2 * rho * currDp);
 end fuelPump;
 
