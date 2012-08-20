@@ -1263,7 +1263,7 @@ while a throttle position of 0 degrees corresponds to a closed throttle.
       Engine.Components.Throttle throttle(dia=0.10) annotation (extent=[-20, 
             80; 20, 40], rotation=90);
     equation 
-      connect(volume_value.outPort, manifold_volume.volume) annotation (
+      connect(volume_value.RealOutput, manifold_volume.volume) annotation (
           points=[61, -50; 80, -50; 80, 0; 44, 2.22045e-015]);
       connect(manifold_volume.state, manifold) annotation (points=[
             2.22045e-015, 2.22045e-015; 0, -100], style(color=45));
