@@ -142,7 +142,7 @@ set of engine geometry characteristics.
       "Computes combustion chamber volume as a function of piston position" 
       Modelica.Mechanics.Translational.Interfaces.Flange_a piston annotation (
           extent=[-10, -90; 10, -70]);
-      Modelica.Blocks.Interfaces.RealOutput volume(final n=1) annotation (extent=
+      Modelica.Blocks.Interfaces.RealOutput volume annotation (extent=
             [-120, -10; -100, 10], rotation=180);
       Interfaces.EngineGeometryRequired geom annotation (extent=[100, -10; 120
             , 10], rotation=180);
@@ -361,7 +361,7 @@ connect a combustion model.
     model Throttle "Orifice with throttle plate" 
       parameter Modelica.SIunits.Diameter dia=0.1 "Throttle diameter";
       extends Orifice(final Aref=Modelica.Constants.PI*(dia/2)^2);
-      Modelica.Blocks.Interfaces.RealInput throttle_angle(final n=1) 
+      Modelica.Blocks.Interfaces.RealInput throttle_angle
         "Throttle Angle [deg]" annotation (extent=[-10, 100; 10, 120], rotation
           =270);
       annotation (
@@ -669,9 +669,9 @@ the spark strategy to change as engine conditions changed but this model just as
       Real tmp;
     public 
       Interfaces.Gas cylinder annotation (extent=[-10, -50; 10, -30]);
-      Modelica.Blocks.Interfaces.RealInput mass(final n=1) annotation (extent=[-
+      Modelica.Blocks.Interfaces.RealInput mass annotation (extent=[-
             70, -100; -50, -120], rotation=270);
-      Modelica.Blocks.Interfaces.BooleanInput start(final n=1) annotation (
+      Modelica.Blocks.Interfaces.BooleanInput start annotation (
           extent=[-10, 100; 10, 120], rotation=270);
       Modelica.Mechanics.Rotational.Interfaces.Flange_a crank annotation (
           extent=[-110, -50; -90, -30]);
@@ -753,7 +753,7 @@ the burn duration is a fixed parameter.
       Types.RPM avg_rpm;
       Modelica.SIunits.Time previous_time;
       
-      Modelica.Blocks.Interfaces.RealInput rpm(final n=1) annotation (extent=[-
+      Modelica.Blocks.Interfaces.RealInput rpm annotation (extent=[-
             120, -10; -100, 10]);
       Modelica.Mechanics.Rotational.Interfaces.Flange_a shaft annotation (
           extent=[90, -10; 110, 10]);
@@ -1258,7 +1258,7 @@ while a throttle position of 0 degrees corresponds to a closed throttle.
       Interfaces.Gas ambient annotation (extent=[-10, 90; 10, 110]);
       Interfaces.Gas manifold annotation (extent=[-10, -110; 10, -90], layer=
             "icon");
-      Modelica.Blocks.Interfaces.RealInput throttle_angle(final n=1) annotation (
+      Modelica.Blocks.Interfaces.RealInput throttle_angle annotation (
           extent=[-120, -10; -100, 10], layer="icon");
       Engine.Components.Throttle throttle(dia=0.10) annotation (extent=[-20, 
             80; 20, 40], rotation=90);
