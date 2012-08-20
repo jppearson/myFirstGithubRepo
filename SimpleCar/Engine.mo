@@ -111,7 +111,7 @@ set of engine geometry characteristics.
     geom.stroke = stroke;
     geom.conrod = conrod;
     geom.Vc = geom.Vd/(comp_ratio - 1);
-    geom.Ap = Modelica.Constants.PI*(bore/2)^2;
+    geom.Ap = Modelica.Constants.pi*(bore/2)^2;
     geom.Vd = stroke*geom.Ap;
     geom.crank = stroke/2.0;
   end GeometrySource;
@@ -360,7 +360,7 @@ connect a combustion model.
     end Orifice;
     model Throttle "Orifice with throttle plate" 
       parameter Modelica.SIunits.Diameter dia=0.1 "Throttle diameter";
-      extends Orifice(final Aref=Modelica.Constants.PI*(dia/2)^2);
+      extends Orifice(final Aref=Modelica.Constants.pi*(dia/2)^2);
       Modelica.Blocks.Interfaces.RealInput throttle_angle
         "Throttle Angle [deg]" annotation (extent=[-10, 100; 10, 120], rotation
           =270);
@@ -384,13 +384,13 @@ connect a combustion model.
 "));
     equation 
       Cd = Modelica.Math.sin(throttle_angle*Modelica.Constants.
-        PI/180)^2;
+        pi/180)^2;
     end Throttle;
     model Valve "Engine poppet valve" 
       parameter Modelica.SIunits.Diameter dia=0.012 "Valve diameter";
       parameter Modelica.SIunits.Length max_lift=0.012 "Maximum Valve Lift";
       parameter Real max_discharge=0.7 "Maximum Discharge Coefficient";
-      extends Orifice(final Aref=Modelica.Constants.PI*(dia/2)^2);
+      extends Orifice(final Aref=Modelica.Constants.pi*(dia/2)^2);
     protected 
       parameter Real c_over_l=max_discharge/max_lift;
       annotation (
@@ -515,7 +515,7 @@ so that each cylinder can be rigidly connected to the crankshaft by independentl
     equation 
       shaft_speed = 30*der(crank.phi)/Modelica.Constants.pi;
       crank.tau + cyl.tau = 0;
-      cyl.phi = crank.phi + shift*Modelica.Constants.PI/180.0;
+      cyl.phi = crank.phi + shift*Modelica.Constants.pi/180.0;
     end OffsetShaft;
     model CrankSlider "A crank slider mechanism" 
     protected 
@@ -612,7 +612,7 @@ the spark strategy to change as engine conditions changed but this model just as
 "));
     equation 
       crank.tau = 0;
-      cur_pos = crank.phi*180/Modelica.Constants.PI;
+      cur_pos = crank.phi*180/Modelica.Constants.pi;
     algorithm 
       when initial() then
         next_spark := -spark_advance;
@@ -727,10 +727,10 @@ the burn duration is a fixed parameter.
       assert(burn_duration > 1, "Invalid burn duration");
       cylinder.mdot = 0;
       cylinder.q = if (burning) then -amplitude*Modelica.Math.sin((time - 
-        start_burn)/(end_burn - start_burn)*Modelica.Constants.PI)^2 else 0.0;
+        start_burn)/(end_burn - start_burn)*Modelica.Constants.pi)^2 else 0.0;
       der(tmp) = cylinder.q;
       w = der(crank.phi);
-      dps = w*180/Modelica.Constants.PI;
+      dps = w*180/Modelica.Constants.pi;
       crank.tau = 0;
     algorithm 
       when start then
@@ -1001,9 +1001,9 @@ maximum lift.
       assert(vc > vo + 20, "Invalid cam timings");
       camshaft.tau = 0;
       valve_lift.s = if (local_ca < vo or local_ca > vc) then 0.0 else 
-        max_lift*Modelica.Math.sin((local_ca - vo)*norm*Modelica.Constants.PI)^
+        max_lift*Modelica.Math.sin((local_ca - vo)*norm*Modelica.Constants.pi)^
         2;
-      local_ca = mod(camshaft.phi*180.0/Modelica.Constants.PI, 360);
+      local_ca = mod(camshaft.phi*180.0/Modelica.Constants.pi, 360);
       
     end Cam;
     model Reservoir "Infinite reservoir" 
