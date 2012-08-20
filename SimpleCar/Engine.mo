@@ -204,7 +204,7 @@ translational domain in the case of the piston position) that a zero
 contribution be provided for any flow variables.
 "));
     equation 
-      volume.signal[1] = geom.Vc + geom.Ap*piston.s;
+      volume = geom.Vc + geom.Ap*piston.s;
       piston.f = 0;
     end ChamberVolume;
     model ControlVolume "Thermodynamic control volume" 
@@ -215,7 +215,7 @@ contribution be provided for any flow variables.
       Modelica.SIunits.Temperature T(start=300) = state.T "Temperature";
       Modelica.SIunits.MassFlowRate mdot=state.mdot "Net mass flow";
       Modelica.SIunits.Power q=state.q "Net power";
-      Modelica.SIunits.Volume V=volume.signal[1] "Chamber volume";
+      Modelica.SIunits.Volume V=volume "Chamber volume";
       Modelica.SIunits.AmountOfSubstance N "Number of moles of gas";
       Real R=Modelica.Constants.R;
       Real logV;
@@ -1177,7 +1177,7 @@ gases, the crankshaft and geometry information.
         ivc=ivc, 
         ivd=ivd, 
         evd=evd) annotation (extent=[50, -20; 90, 40]);
-      Modelica.Mechanics.Rotational.Inertia crankshaft_inertia(J=0.03, w(start
+      Modelica.Mechanics.Rotational.Components.Inertia crankshaft_inertia(J=0.03, w(start
             =157)) annotation (extent=[-90, -60; -70, -40], rotation=90);
     equation 
       connect(cylinder1.intake, intake) annotation (points=[-100, 36; -100
@@ -1263,7 +1263,7 @@ while a throttle position of 0 degrees corresponds to a closed throttle.
       Engine.Components.Throttle throttle(dia=0.10) annotation (extent=[-20, 
             80; 20, 40], rotation=90);
     equation 
-      connect(volume_value.RealOutput, manifold_volume.volume) annotation (
+      connect(volume_value.y, manifold_volume.volume) annotation (
           points=[61, -50; 80, -50; 80, 0; 44, 2.22045e-015]);
       connect(manifold_volume.state, manifold) annotation (points=[
             2.22045e-015, 2.22045e-015; 0, -100], style(color=45));

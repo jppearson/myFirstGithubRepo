@@ -127,9 +127,9 @@ to keep the speed fixed.
       stroke=.08, 
       conrod=.152, 
       comp_ratio=9.5) annotation (extent=[60, 0; 80, 20]);
-    Modelica.Mechanics.Rotational.Inertia flywheel(J=10) annotation (extent=[-
+    Modelica.Mechanics.Rotational.Components.Inertia flywheel(J=10) annotation (extent=[-
           40, -70; -20, -50]);
-    Modelica.Mechanics.Rotational.Torque starter annotation (extent=[-68, -70
+    Modelica.Mechanics.Rotational.Sources.Torque starter annotation (extent=[-68, -70
           ; -48, -50]);
     Modelica.Blocks.Sources.Step starter_torque(height={100}, startTime={1}) 
       annotation (extent=[-100, -70; -80, -50]);
@@ -226,7 +226,7 @@ that this model will demonstrate manifold filling and emptying effects.
           , 20]);
     Engine.Components.Reservoir exhaust_manifold annotation (extent=[60, 0; 80
           , 20]);
-    Modelica.Mechanics.Rotational.Inertia flywheel(J=10, w(start=157)) 
+    Modelica.Mechanics.Rotational.Components.Inertia flywheel(J=10, w(start=157)) 
       annotation (extent=[0, -40; 20, -20]);
   equation 
     connect(geometry.geom, engine.engine_geometry) annotation (points=[79, -
