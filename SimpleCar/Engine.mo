@@ -221,7 +221,7 @@ contribution be provided for any flow variables.
       Real logV;
       Real logP;
     public 
-      Modelica.Blocks.Interfaces.RealInput volume(final n=1) annotation (extent=[
+      Modelica.Blocks.Interfaces.RealInput volume annotation (extent=[
             100, -10; 120, 10], rotation=180);
     public 
       Modelica.Blocks.Interfaces.RealOutput mass annotation (extent=[-70, 100; -
@@ -295,7 +295,7 @@ connect a combustion model.
       
       // Conservation of mass
       der(m) = mdot;
-      mass.signal[1] = m;
+      mass = m;
       logV = Modelica.Math.log(V);
       logP = Modelica.Math.log(P);
     end ControlVolume;
@@ -383,7 +383,7 @@ connect a combustion model.
         Documentation(info="A very simple engine throttle.  The input signal is the throttle angle.
 "));
     equation 
-      Cd = Modelica.Math.sin(throttle_angle.signal[1]*Modelica.Constants.
+      Cd = Modelica.Math.sin(throttle_angle*Modelica.Constants.
         PI/180)^2;
     end Throttle;
     model Valve "Engine poppet valve" 
@@ -620,8 +620,8 @@ the spark strategy to change as engine conditions changed but this model just as
           next_spark := next_spark + 720;
         end while;
       end when;
-      spark.signal[1] := cur_pos > next_spark;
-      when spark.signal[1] then
+      spark := cur_pos > next_spark;
+      when spark then
         next_spark := next_spark + 720;
       end when;
     end SparkControl;
@@ -733,10 +733,10 @@ the burn duration is a fixed parameter.
       dps = w*180/Modelica.Constants.PI;
       crank.tau = 0;
     algorithm 
-      when start.signal[1] then
+      when start then
         start_burn := time;
         end_burn := time + (burn_duration/dps);
-        amplitude := lhv*(mass.signal[1]/(afr + 1))*2.0*dps/burn_duration;
+        amplitude := lhv*(mass/(afr + 1))*2.0*dps/burn_duration;
         burning := true;
       end when;
       when time >= end_burn then
@@ -802,14 +802,14 @@ an infinite mass.  It is important that the input signal is continuous.  Further
 of \"revolutions per minute\".
 "));
     equation 
-      der(shaft.phi) = rpm.signal[1]*Modelica.Constants.pi/30;
+      der(shaft.phi) = rpm*Modelica.Constants.pi/30;
       der(work) = shaft.tau*der(shaft.phi);
     algorithm 
       when initial() then
         next_rotation := shaft.phi + cycle_fraction*4*Modelica.Constants.pi;
         last_work := 0;
         previous_time := time;
-        avg_rpm := rpm.signal[1];
+        avg_rpm := rpm;
       end when;
       when shaft.phi > next_rotation then
         next_rotation := next_rotation + cycle_fraction*4*Modelica.Constants.
