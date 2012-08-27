@@ -1,27 +1,28 @@
 package HighLevelDesign
-  model Driver
-    parameter Real driverMass;
-    //Modelica.SIunits.Mass driverMass;
-    Real cmdDir;
-    parameter Real cmdThrottle;
-    parameter Real cmdBreak;
-  end Driver;
   model Road
     parameter Real frictionMu;
     Real[2] carPos;
   end Road;
   model Atmosphere
-  	//Modelica.SIunits.Pressure airPressure;
-  	//Modelica.SIunits.Temperature temperature;
+    //Modelica.SIunits.Pressure airPressure;
+    //Modelica.SIunits.Temperature temperature;
     parameter Real temperature;
     parameter Real airPressure;
     parameter Real timeOfDay;
   end Atmosphere;
+  model Driver
+    parameter Real driverMass;
+    //Modelica.SIunits.Mass driverMass;
+    Real cmdDir;
+    Real cmdThrottle;
+    Real cmdBreak;
+  end Driver;
   partial model carInterface
     Real[2] position;
     //Modelica.SIunits.Mass totalMass = 1200;
     Real totalMass = 200000;
     Real[2] velocity;
+    Real speed;
     Real[2] acceleration;
     Real[2] F;
     Real stearingWheel;
@@ -41,6 +42,7 @@ package HighLevelDesign
     velocity[2] = der(position[2]);
     acceleration[1] = der(velocity[1]);
     acceleration[2] = der(velocity[2]);
+    speed = sqrt(velocity[1] ^ 2 + velocity[2] ^ 2);
   end carInterface;
 end HighLevelDesign;
 

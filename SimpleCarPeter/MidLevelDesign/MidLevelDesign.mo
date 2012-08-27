@@ -19,7 +19,7 @@ partial model ShiftStrategyInterface
 	equation
 		kph = der(wheel.phi)*tire_radius*60*60/1000;
 		wheel.tau = 0;
-end ShiftStrategyInterface
+end ShiftStrategyInterface;
 
 
 partial model ChassisInterface

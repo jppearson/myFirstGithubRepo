@@ -2,7 +2,8 @@ model DummyCarTest
   import DummyCar.*;
   import HighLevelDesign.*;
   import Modelica.Constants.*;
-  Driver driver1(driverMass = 50000, cmdThrottle = 30, cmdBreak = 0, cmdDir = (3 * pi) / 4);
+  DummyDriver1 driver1();
+  //DummyDriver2 driver1();
   DummyCar dummyCar1();
   Atmosphere atmosphere1(temperature = 25, airPressure = 1, timeOfDay = 1);
   Road road1(frictionMu = 0);
