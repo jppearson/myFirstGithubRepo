@@ -1,18 +1,16 @@
 package HighLevelDesign
+	import Modelica.SIunits.*;
   model Road
     parameter Real frictionMu;
     Real[2] carPos;
   end Road;
-  model Atmosphere
-    //Modelica.SIunits.Pressure airPressure;
-    //Modelica.SIunits.Temperature temperature;
-    parameter Real temperature;
-    parameter Real airPressure;
+  partial model AtmosphereInterface
+    AtmosophereComponents.Gas air;
     parameter Real timeOfDay;
   end Atmosphere;
-  model Driver
+  partial model DriverInterface
     parameter Real driverMass;
-    //Modelica.SIunits.Mass driverMass;
+    Modelica.SIunits.Mass driverMass;
     Real cmdDir;
     Real cmdThrottle;
     Real cmdBreak;

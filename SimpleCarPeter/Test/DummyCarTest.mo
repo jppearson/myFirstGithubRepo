@@ -3,9 +3,8 @@ model DummyCarTest
   import HighLevelDesign.*;
   import Modelica.Constants.*;
   DummyDriver1 driver1();
-  //DummyDriver2 driver1();
   DummyCar dummyCar1();
-  Atmosphere atmosphere1(temperature = 25, airPressure = 1, timeOfDay = 1);
+  SimpleAtmosphere atmosphere1();
   Road road1(frictionMu = 0);
 equation
   connect(driver1.driverMass,dummyCar1.driverMass);
