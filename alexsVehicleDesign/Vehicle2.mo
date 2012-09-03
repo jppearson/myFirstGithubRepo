@@ -34,5 +34,8 @@ package vehicle2 "Medium Level Design"
     der(currentFuel) = -fuelRateOut;
     fuelRateOut = if currentFuel > 0 then fuelRateCmd else 0;
   end Tank;
+  model Engine
+    Real e "efficiency of engine";
+  end Engine;
 end vehicle2;
 
