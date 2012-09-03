@@ -1,6 +1,7 @@
-package vehicle
+package vehicle2 "Medium Level Design"
   model Driver
-    Real Throttle;
+    parameter Real mass;
+    Real throttle;
   end Driver;
   model Road
     parameter Real mu "road friction";
@@ -9,9 +10,10 @@ package vehicle
     Real position(start = 0);
     Real velocity;
     Real acceleration;
-    parameter Real totalMass = 100;
+    Real totalMass;
     Real drivingForce,frictionForce;
     Real netForce;
+    parameter Real carMass;
     parameter Real friction;
   equation
     velocity = der(position);
@@ -20,5 +22,17 @@ package vehicle
     netForce = totalMass * acceleration;
     netForce = drivingForce - friction;
   end carInterface;
-end vehicle;
+  model Tank
+    Real mass "kg";
+    parameter Real tareMass;
+    parameter Real maxCapacity;
+    Real currentFuel(start = maxCapacity);
+    Real fuelRateCmd "kg/m^3";
+    Real fuelRateOut;
+  equation
+    mass = currentFuel + tareMass;
+    der(currentFuel) = -fuelRateOut;
+    fuelRateOut = if currentFuel > 0 then fuelRateCmd else 0;
+  end Tank;
+end vehicle2;
 
