@@ -1,5 +1,8 @@
 package MidLevelDesign
 
+import Modelica.Mechanics.Rotational.Interfaces.Flange_a;
+
+
 partial model TransmissionInterface "Transmission Interface"
 	/* This is a basic transmission Interface */
 	TransmissionComponents.GearSelectorInput gear_selector;    // Gear_selctor Input
@@ -23,9 +26,18 @@ end ShiftStrategyInterface;
 
 
 partial model ChassisInterface
+	Modelica.Mechanics.Rotational.Flange_a power;
+	Modelica.Mechanics.Translational.Flange_b wheel;
+	Modelica.Mechanics.Translational.Interfaces.Flange_a road;
+	Modelica.Blocks.Interfaces.Outport speed;
+	Modelica.Mechanics.Rotational.Interfaces.Flange_a wheel;
 end ChassisInterface;
 
 partial model EngineInterface
+	RealInput throttle;
+	Flange_a crankshaft;
+	Atmosphere.Gas intake;
+	Atmosphere.Gas exhaust;
 end EngineInterface;
 
 		
