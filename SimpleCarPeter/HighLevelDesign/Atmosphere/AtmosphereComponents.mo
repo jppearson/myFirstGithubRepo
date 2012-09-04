@@ -1,9 +1,9 @@
-Package AtmosphereComponents
+package AtmosphereComponents
+import Modelica.SIunits.*;
 
 model Gas
-    Modelica.SIunits.Pressure P "Gas pressure";
-    Modelica.SIunits.Temperature T "Gas temperature";
+    Modelica.SIunits.Pressure P;
+    Modelica.SIunits.Temperature T;
 end Gas;
 
-
-end AtmosphereComponets;
+end AtmosphereComponents;

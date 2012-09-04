@@ -4,7 +4,7 @@ import Modelica.Mechanics.Rotational.Interfaces.Flange_a;
 
 
 partial model TransmissionInterface "Transmission Interface"
-	/* This is a basic transmission Interface */
+	//This is a basic transmission Interface
 	TransmissionComponents.GearSelectorInput gear_selector;    // Gear_selctor Input
 	Modelica.Mechanics.Rotational.Interfaces.Flange_a driveline;  // Connection to the driveline
 	Modelica.Mechanics.Rotational.Interfaces.Flange_b engine;  //Connection to the engine
@@ -12,9 +12,9 @@ end TransmissionInterface;
 
 
 partial model ShiftStrategyInterface
-	/* This is a basic interface for any shift strategy model. It connects to the axle of the car and using
-	the tire radius connects the axle of the car and using the tire radius, computes the vehicles translational speed.
-	This speed is then used to determine the appropriate gear which is then assigned to the output gear selector */
+	//This is a basic interface for any shift strategy model. It connects to the axle of the car and using
+	//the tire radius connects the axle of the car and using the tire radius, computes the vehicles translational speed.
+	//This speed is then used to determine the appropriate gear which is then assigned to the output gear selector
 		parameter Modelica.SIunits.Length tire_radius "Tire Radius";
 		Real kph "Vehicle Speed";
 		transmissionComponents.GearSelectorOutput gear_request;
