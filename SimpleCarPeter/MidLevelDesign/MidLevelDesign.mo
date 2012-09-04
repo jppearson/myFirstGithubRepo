@@ -1,11 +1,11 @@
 package MidLevelDesign
 
 import Modelica.Mechanics.Rotational.Interfaces.Flange_a;
-
+import Modelica.Mechanics.Rotational.Interfaces.Flange_b;
 
 partial model TransmissionInterface "Transmission Interface"
 	//This is a basic transmission Interface
-	TransmissionComponents.GearSelectorInput gear_selector;    // Gear_selctor Input
+	//TransmissionComponents.GearSelectorInput gear_selector;    // Gear_selctor Input
 	Modelica.Mechanics.Rotational.Interfaces.Flange_a driveline;  // Connection to the driveline
 	Modelica.Mechanics.Rotational.Interfaces.Flange_b engine;  //Connection to the engine
 end TransmissionInterface;
