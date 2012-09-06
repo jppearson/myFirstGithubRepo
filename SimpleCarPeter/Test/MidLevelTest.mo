@@ -1,16 +1,14 @@
-// Peter Verlangieri
-// September 3, 2012
-
 model MidLevelTest
-  // A high level test that contains a simpleAtmosphere, a dummyDriver, a dummyCar, and a frictionless road
-  // that is used to test the overal simulation design, and topLevel connectivity.
+  // Peter Verlangieri
+  // September 3, 2012
+  // A MidLevelTest that contains a slightly more complicated Vehicle, and driver. Used to test the
+  // implementation of the MidLevelComponents of the MidLevelCar
   import HighLevelDesign.*;
   import Vehicles.MidLevelCar;
   import Atmospheres.SimpleAtmosphere;
-  import Drivers.DummyDriver1;
-  import Drivers.DummyDriver2;
+  import Drivers.MidLevelDriver;
   import Modelica.Constants.*;
-  DummyDriver1 driver();
+  MidLevelDriver driver();
   MidLevelCar car();
   SimpleAtmosphere atmosphere();
   Road road(frictionMu = 0);
@@ -24,6 +22,5 @@ equation
   connect(atmosphere.timeOfDay,car.timeOfDay);
   connect(road.frictionMu,car.frictionMu);
   connect(road.carPos,car.position);
-end HighLevelTest;
 end MidLevelTest;
 

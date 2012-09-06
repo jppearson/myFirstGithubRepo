@@ -1,19 +1,24 @@
-package chassis
-
-/*
-partial model ChassisInterface
-	Modelica.Mechanics.Rotational.Flange_a power;
-	Modelica.Mechanics.Translational.Flange_b wheel;
-	Modelica.Mechanics.Translational.Interfaces.Flange_a road;
-	Modelica.Blocks.Interfaces.Outport speed;
-	Modelica.Mechanics.Rotational.Interfaces.Flange_a wheel;
-end ChassisInterface;
+package Chassis
+  import MidLevelDesign.*;
+  /*
+  partial model ChassisInterface
+		Modelica.SIUnits.Mass chassisMass;
+		Modelica.SIUnits.Mass totalVehicleMass;
+    	Modelica.Mechanics.Rotational.Flange_b power;
+	 	Modelica.Mechanics.Rotational.Interfaces.Flange_a wheel;
+	  	Modelica.Mechanics.Translational.Interfaces.Flange_a road;
+		Real steeringWheel;
+		Real brakes;
+     Modelica.Blocks.Interfaces.Outport speed;
+  end ChassisInterface;
 */
+  model SimpleChassis
+    extends ChassisInterface;
+    Rotational.Components.IdealRollingWheel simpleWheel(radius = 0.5, useSupportT = true);
+  equation
+    connect(simpleWheel.flangeR,power);
+    connect(simpleWheel.flangeT,totalMass);
+    connect(simpleWheel.supportT,road);
+  end SimpleChassis;
+end Chassis;
 
-model SimpleChassis
-    extends chassisInterface;
-equation
-
-end SimpleChassis;
-
-end chassis;
