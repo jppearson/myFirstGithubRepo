@@ -1,8 +1,9 @@
 model HighLevelTest
-  //Peter Verlangieri
-  //September 1, 2012
-  // A high level test that contains a simpleAtmosphere, a dummyDriver, a dummyCar, and a frictionless road
-  // that is used to test the overal simulation design, and topLevel connectivity.
+  /*Peter Verlangieri
+  September 1, 2012
+   A high level test that contains a simpleAtmosphere, a dummyDriver, a dummyCar, and a frictionless road
+   that is used to test the overal simulation design, and topLevel connectivity.
+*/
   import HighLevelDesign.*;
   import Vehicles.DummyCar;
   import Atmospheres.SimpleAtmosphere;

@@ -1,5 +1,6 @@
 package HighLevelDesign
   import Modelica.SIunits.*;
+  import Modelica.Mechanics.*;
   model Road
     Real frictionMu;
     Real[2] carPos;

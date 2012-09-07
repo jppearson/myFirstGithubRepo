@@ -1,4 +1,5 @@
 package MidLevelDesign
+  import HighLevelDesign.*;
   import Modelica.Mechanics.*;
   import Modelica.Blocks.*;
   partial model TransmissionInterface "Transmission Interface"
@@ -27,7 +28,7 @@ package MidLevelDesign
     Modelica.SIunits.Mass totalVehicleMass;
     Modelica.Mechanics.Rotational.Interfaces.Flange_b power;
     Modelica.Mechanics.Rotational.Interfaces.Flange_a wheel;
-    Modelica.Mechanics.Translational.Interfaces.Flange_a road;
+    Modelica.Mechanics.Translational.Interfaces.Flange_a roadSurface;
     Real steeringWheel;
     Real brakes;
     //Modelica.Blocks.Interfaces.Outport speed;
@@ -39,5 +40,9 @@ package MidLevelDesign
     Real intake;
     Real exhaust;
   end EngineInterface;
+  model MidLevelRoad
+    extends HighLevelDesign.Road;
+    Modelica.Mechanics.Translational.Interfaces.Flange_a surface;
+  end MidLevelRoad;
 end MidLevelDesign;
 
