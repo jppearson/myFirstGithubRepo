@@ -1,5 +1,5 @@
 package MidLevelDesign
-  import HighLevelDesign.*;
+  import SimpleCarPeter.HighLevelDesign.*;
   import Modelica.Mechanics.*;
   import Modelica.Blocks.*;
   partial model TransmissionInterface "Transmission Interface"

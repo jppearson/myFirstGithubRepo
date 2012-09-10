@@ -1,5 +1,6 @@
 package Drivers
-  import HighLevelDesign.*;
+  import SimpleCarPeter.HighLevelDesign.*;
+  import Modelica.Mechanics.*;
   import Modelica.Constants.*;
   //Simple Driver that travels in a single direction and applys a constant throttle
   //Simple Driver that travels in a direction of pi/4 and incrementally increases the throttle
