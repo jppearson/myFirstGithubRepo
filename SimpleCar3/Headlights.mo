@@ -1,5 +1,5 @@
 package Headlights
-  import Modelica.SIunits.*;
+  import Modelica.SIunits.Mass;
   model SimpleHeadlight
     Modelica.SIunits.Mass headlightMass = 100;
     Real timeOfDay;

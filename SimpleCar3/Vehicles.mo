@@ -39,47 +39,50 @@ package Vehicles
   end DummyCar;
   // A slightly more complex car that contains a simple chassis, simple engine, and simple transmission
   partial model CarInterface2
-    Modelica.SIunits.Mass totalMass;
     Modelica.SIunits.Mass driverMass;
-    //Real position;
-    //Real velocity;
-    //Real acceleration;
-    //Real steeringWheel;
+    Real position;
+    Real velocity;
+    Real acceleration;
+    Real steeringWheel;
     Real gasPedal;
     Real brakePedal;
     //Real frictionMu;
-    //Real timeOfDay;
+    Real timeOfDay;
     //Modelica.SIunits.Pressure airPressure;
     //Modelica.SIunits.Temperature airTemperature;
+  equation
+    velocity = der(position);
+    acceleration = der(velocity);
   end CarInterface2;
-  //velocity = der(position);
-  //acceleration = der(velocity);
   model MidLevelCar
     extends CarInterface2;
     Chassis.SimpleChassis chassis();
     Engines.SimpleEngine engine();
     Transmissions.SingleSpeedTransmission transmission();
-    //Brakes.SimpleBrake brakes();
-    //Headlights.SimpleHeadlight headlight();
-    Modelica.Mechanics.Translational.Interfaces.Flange_b roadSurface;
-    //Real headlights;
-    Real airIn = 100;
+    Brakes.SimpleBrake brakes();
+    Headlights.SimpleHeadlight headlight();
+    Modelica.Mechanics.Translational.Interfaces.Flange_b roadSurface();
+    Real headlights;
+    Real airIn;
     Real airOut;
   equation
-    totalMass = chassis.chassisMass + engine.engineMass + transmission.transmissionMass;
-    connect(totalMass,chassis.totalVehicleMass);
+    connect(chassis.engineMass,engine.engineMass);
+    connect(chassis.transmissionMass,transmission.transmissionMass);
+    connect(driverMass,chassis.driverMass);
+    connect(chassis.brakesMass,brakes.brakeMass);
+    connect(chassis.headlightMass,headlight.headlightMass);
+    connect(position,roadSurface.s);
     connect(gasPedal,engine.throttle);
     connect(airIn,engine.intake);
     connect(airOut,engine.exhaust);
     connect(engine.crankshaft,transmission.engine);
     connect(transmission.driveline,chassis.power);
     connect(roadSurface,chassis.roadSurface);
+    connect(timeOfDay,headlight.timeOfDay);
+    connect(headlights,headlight.lightBulb);
+    connect(brakePedal,brakes.brakePedal);
+    connect(brakes.brakePad,chassis.brakes);
+    connect(steeringWheel,chassis.steeringWheel);
   end MidLevelCar;
-  //position = roadSurface.s;
-  //connect(steeringWheel,chassis.steeringWheel);
-  //connect(chassis.brakes,brakes.brakePad);
-  //connect(brakePedal,brakes.brakePedal);
-  //connect(timeOfDay,headlight.timeOfDay);
-  //connect(headlights,headlight.lightBulb);
 end Vehicles;
 

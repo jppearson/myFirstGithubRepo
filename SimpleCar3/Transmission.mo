@@ -7,7 +7,7 @@ package Transmissions
     Modelica.Mechanics.Rotational.Interfaces.Flange_b engine;
   end TransmissionInterface;
   model SingleSpeedTransmission
-    extends TransmissionInterface(transmissionMass = 200);
+    extends TransmissionInterface(transmissionMass = 100);
   equation
     connect(engine,driveline);
   end SingleSpeedTransmission;

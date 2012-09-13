@@ -22,8 +22,8 @@ package Drivers
     cmdThrottle = 100;
   end DummyDriver1;
   model MidLevelDriver
-    extends DriverInterface(driverMass = 100000);
-    parameter Real[4] t = {100,200,300,400};
+    extends DriverInterface(driverMass = 100);
+    parameter Real[4] t = {20,40,60,80};
   equation
     cmdBrake = 0;
     cmdDir = 0;
